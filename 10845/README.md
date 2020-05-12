@@ -1,4 +1,4 @@
-# 큐
+# 큐(https://www.acmicpc.net/problem/10845)
 
 ## 문제
 
