@@ -5,10 +5,11 @@ import math as Math
 
 ###########################################
 # 추가 된 부분
-# Josephus1158
-# BlackJeck2798
-# Queue10845
 ###########################################
+# GetDecimal1929
+# FindDecimal1978
+# GCDAndLCM2609
+# Goldbach6588
 
 ###########################################
 # 유틸성 함수 묶음
@@ -22,6 +23,12 @@ class Utils:
     #
     # run : <p> 코드 실행을 위한 추상화 함수 </p>
     #     @param runLst:array 코드 묶음
+    #
+    # reduce : <p> 전방위로 탐색하면서 값을 증가/감을 처리한다</p>
+    #     @param l:Array 탐색 시 사용 할 리스트
+    #     @param f:Function 탐색 시 처리 할 함수
+    #     @param i:Object 초기 값
+
 
     def isUnary(self, e):
 
@@ -31,9 +38,20 @@ class Utils:
 
         return 1 if len(e) == 2 else 0
 
-    def run(self,runLst):
+    def run(self, runLst):
         for r in runLst :
             r.run()
+
+    def reduce(self, l, f, i):
+        
+        v1 = i
+        v2 = [v for v in l]
+        
+        for v in v2 :
+            v1 = f(v2, v, v1)
+        
+        return v1
+
 
 # 함수 초기화 처리
 read = sys.stdin.readline
@@ -707,9 +725,7 @@ class Deque10866:
                 
                 c = c[0] # 명령자(command allow)
 
-                if c == 'pop': # pop command
-                    print(self.deque.pop())
-                elif c == 'pop_front': # pop_front command
+                if c == 'pop_front': # pop_front command
                     print(self.deque.pop_front())
                 elif c == 'pop_back': # pop_back command
                     print(self.deque.pop_back())
@@ -735,20 +751,179 @@ class Deque10866:
 
         self.dequeProccess()
 
+###########################################
+# no        title
+# 2609      최대공약수와 최소공배수
+# 
+# basic time complexity = o(n)
+###########################################
+class GCDAndLCM2609:
+
+    def gcd(self, n, m, r):
+
+        return r if r == 1 or ( n % r == 0 and m % r == 0 ) else self.gcd(n, m, r-1)
+
+    def run(self):
+
+        n, m = [int(v) for v in input().split()]
+
+        n, m = [n, m] if n <= m else [m, n]
+
+        v1 = self.gcd(n, m, n)
+
+        v2 = int( n * m / v1 )
+        
+        print("{0}\n{1}".format(v1,v2))
+
+###########################################
+# no        title
+# 1978      소수 찾기
+# 
+# basic time complexity = o(n)-1
+###########################################
+class FindDecimal1978:
+
+    def run(self):
+
+        n = int(input())
+
+        l = [int(v) for v in input().split()]
+
+        r = util.reduce(l, self.callback, 0)
+
+        print(r)
+
+    def callback(self, l, v, i):
+        e = True
+        
+        if v == 1:
+            return i
+
+        for v1 in range(2, v):
+            if v % v1 == 0:
+                e = False
+                break
+
+        return i + 1 if e else i
+
+###########################################
+# no        title
+# 1929      소수 구하기
+# 
+# basic time complexity = o(n^3)
+###########################################
+class GetDecimal1929:
+
+    def run(self):
+        n, m = [int(v) for v in input().split()]
+
+        l = [False if v == 0 or v == 1 else True for v in range(m+1)]
+
+        for v1 in range(2, m+1):
+
+            for v2 in range(2, m+1):
+
+                v3 = v2 * v1
+
+                if v3 > m: 
+                    break
+
+                l[v3] = False
+
+        for v0 in range(n,m+1):
+            if l[v0]:
+                print(v0)
+            
+
+###########################################
+# no        title
+# 6588      골드바흐의 추측
+# 
+# basic time complexity = o(n^n)
+###########################################
+class Goldbach6588:
+
+    dic = {}
+
+    def isSingleDecimal(self, n):
+
+        # 홀수의 경우
+        if n % 2 == 0:
+            return False
+
+        # 딕셔너리에 저장 되어 있는 값
+        if n in self.dic:
+            return self.dic[n]
+
+        # 소수 확인
+        for v in range(2,n):
+            if n % v == 0:
+                return False
+        
+        # 소수일 경우 딕셔너리에 캐싱
+        self.dic[n] = True
+
+        return self.dic[n]
+
+    def nextSingleDecimal(self, n, m):
+
+        for v in range(n+1,1000000):
+
+            if v % 2 != 0:
+
+                if self.isSingleDecimal(v):
+
+                    return v
+
+        return -1
+
+    def run(self):
+
+        init = 3
+
+        while(True):
+            
+            n = int(read())
+
+            if(n == 0):
+                break
+
+            d1 = init
+
+            while(True):
+
+                d2 = n - d1
+
+                if(self.isSingleDecimal(d2)):
+                    print("{0} = {1} + {2}".format(n, d1, d2))
+                    break
+                    
+                d1 = self.nextSingleDecimal(d1, n)
+
+                if d1 < 0:
+                    break
+
+
 
 # test asseting
 util.run([
     # Editor1406()
     # Josephus1158()
     # StackNumber1874()
+    # GetDecimal1929()
+    # FindDecimal1978()
     # HelloWorld2557()
+    # GCDAndLCM2609()
     # BlackJeck2798()
+    Goldbach6588()
     # Bracket9012()
     # ReverseWord9093()
     # Starwars9653()
     # Stack10828()
     # Queue10845()
-    Deque10866()
+    # Deque10866()
     # Fibonacci10870()
     # Factorial10872()
 ])
+
+
