@@ -56,25 +56,39 @@ class Utils:
 read = sys.stdin.readline
 util = Utils()
 
+
 ###########################################
 # no        title
-# 10872     팩토리얼
+# 1676      팩토리얼 0의 개수
 # 
-# basic time complexity = o(n)
+# basic time complexity = o(n) + r
 ###########################################
-class Factorial10872:
+class FactorialZero1676:
 
-    def factorial(self, n):
+    def factorialN(self, n):
         
-        return n * self.factorial(n -1) if n > 1 else 1
+        return n * self.factorialN(n -1) if n > 1 else 1
 
     def run(self):
+        v = str(self.factorialN(int(input())))
+        r = self.factorialV(v, 1)
 
-        print(self.factorial(int(input())))
+        print(r)
+
+    def factorialV(self, v, l):
+        
+        pos = ( l * -1 ) 
+
+        if len(v) == l :
+            return 0
+        elif v[pos] != '0' :
+            return 0
+        else:
+            return 1 + self.factorialV(v, l + 1)
 
 # test asseting
 util.run([
-    Factorial10872()
+    FactorialZero1676()
 ])
 
 

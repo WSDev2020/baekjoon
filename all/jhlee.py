@@ -52,7 +52,6 @@ class Utils:
         
         return v1
 
-
 # 함수 초기화 처리
 read = sys.stdin.readline
 util = Utils()
@@ -509,13 +508,18 @@ class Josephus1158:
 class Factorial10872:
 
     def factorial(self, n):
-        
         return n * self.factorial(n -1) if n > 1 else 1
 
     def run(self):
-
         print(self.factorial(int(input())))
 
+
+###########################################
+# no        title
+# 10870     피보나치
+# 
+# basic time complexity = o(n)
+###########################################
 class Fibonacci10870:
     def fibonacci(self, n):
 
@@ -904,6 +908,34 @@ class Goldbach6588:
                     break
 
 
+###########################################
+# no        title
+# 1676      팩토리얼 0의 개수
+# 
+# basic time complexity = o(n)*2
+###########################################
+class FactorialZero1676:
+
+    def factorialN(self, n):
+        
+        return n * self.factorialN(n -1) if n > 1 else 1
+
+    def run(self):
+        v = str(self.factorialN(int(input())))
+        r = self.factorialV(v, 1)
+
+        print(r)
+
+    def factorialV(self, v, l):
+        
+        pos = ( l * -1 ) 
+
+        if len(v) == l :
+            return 0
+        elif v[pos] != '0' :
+            return 0
+        else:
+            return 1 + self.factorialV(v, l + 1)
 
 # test asseting
 util.run([
@@ -915,7 +947,7 @@ util.run([
     # HelloWorld2557()
     # GCDAndLCM2609()
     # BlackJeck2798()
-    Goldbach6588()
+    # Goldbach6588()
     # Bracket9012()
     # ReverseWord9093()
     # Starwars9653()
@@ -924,6 +956,7 @@ util.run([
     # Deque10866()
     # Fibonacci10870()
     # Factorial10872()
+    # FactorialZero1676()
 ])
 
 
