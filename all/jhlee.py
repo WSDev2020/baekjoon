@@ -6,10 +6,8 @@ import math as Math
 ###########################################
 # 추가 된 부분
 ###########################################
-# GetDecimal1929
-# FindDecimal1978
-# GCDAndLCM2609
-# Goldbach6588
+# FactorialZero1676
+# Factorial10872
 
 ###########################################
 # 유틸성 함수 묶음
@@ -912,7 +910,7 @@ class Goldbach6588:
 # no        title
 # 1676      팩토리얼 0의 개수
 # 
-# basic time complexity = o(n)*2
+# basic time complexity = o(n) + r
 ###########################################
 class FactorialZero1676:
 
