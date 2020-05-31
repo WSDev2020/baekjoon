@@ -915,7 +915,6 @@ class Goldbach6588:
 class FactorialZero1676:
 
     def factorialN(self, n):
-        
         return n * self.factorialN(n -1) if n > 1 else 1
 
     def run(self):
@@ -925,15 +924,8 @@ class FactorialZero1676:
         print(r)
 
     def factorialV(self, v, l):
-        
-        pos = ( l * -1 ) 
 
-        if len(v) == l :
-            return 0
-        elif v[pos] != '0' :
-            return 0
-        else:
-            return 1 + self.factorialV(v, l + 1)
+        return 0 if len(v) == l or v[l * -1] != '0' else 1 + self.factorialV(v, l + 1)
 
 # test asseting
 util.run([
