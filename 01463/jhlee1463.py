@@ -85,7 +85,7 @@ class Make1No1463:
             v3 = 1 + self.findNum(n - 1)
 
         # 최적화를 위한 임시 값 등록
-        self.d[n] = v3 if ( v3 <= v2 and v3 <= v1) else v2 if ( v2 <= v1 and v2 <= v3) else v1
+        self.d[n] = v3 if ( v3 <= v2 and v3 <= v1 ) else v2 if ( v2 <= v1 and v2 <= v3 ) else v1
 
         return self.d[n]
 
