@@ -6,7 +6,7 @@
 
 PS카드는 PS(Problem Solving)분야에서 유명한 사람들의 아이디와 얼굴이 적혀있는 카드이다. 각각의 카드에는 등급을 나타내는 색이 칠해져 있고, 다음과 같이 8가지가 있다.
 
-<span style="color:'blue'">전설카드</span>
+* <span style='color:"red"'>전설카드</span>
 * 레드카드
 * 오렌지카드
 * 퍼플카드
