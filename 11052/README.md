@@ -8,6 +8,9 @@ PS카드는 PS(Problem Solving)분야에서 유명한 사람들의 아이디와 
 
 <p style='color:red'>전설카드</p>
 
+<font style='color:red'>전설카드</font>
++전설카드
+
 * <span style='color:"red"'>전설카드</span>
 * 레드카드
 * 오렌지카드
