@@ -1002,6 +1002,65 @@ class N2tiling11726:
 
         print(r%10007)
 
+###########################################
+# no        title
+# 11726     2×n 타일링
+# 
+# basic time complexity = o(n)
+###########################################
+class N2tiling11726:
+
+    def __fib__(self, n):
+
+        if n == 0: return print(0) # 0일 경우
+        if n == 1: return print(1) # 1일 경우
+
+        r = 1
+        p = 1
+        v = p
+
+        for i in range(n-1):
+            v = r + p
+            r = p
+            p = v
+
+        return p
+
+    def run(self):
+
+        n = int(input())
+        
+        r = self.__fib__(n)
+
+        print(r%10007)
+
+###########################################
+# no        title
+# 9095      1,2,3 더하기
+# 
+# basic time complexity = o^n*3
+###########################################
+class Addition123Number9095:
+
+    # 최적화를 위한 키 매핑전략
+    d = {-3 : 0, -2 : 0, -1 : 0, 0 : 1, 1 : 1, 2 : 2}
+
+    def addN(self, n):
+
+        if n in self.d :
+            return self.d[n]
+
+        self.d[n] = self.addN(n-1) + self.addN(n-2) + self.addN(n-3)
+
+        return self.addN(n)
+
+    def run(self):
+        l = [0 for v in range(int(input()))]
+
+        for n1 in range(len(l)):
+            l[n1] = str(self.addN(int(input())))
+
+        print("\n".join(l))
 
 # test asseting
 util.run([
@@ -1018,11 +1077,12 @@ util.run([
     # Goldbach6588()
     # Bracket9012()
     # ReverseWord9093()
+    Addition123Number9095()
     # Starwars9653()
     # Stack10828()
     # Queue10845()
     # Deque10866()
     # Fibonacci10870()
     # Factorial10872()
-    N2tiling11726()
+    # N2tiling11726()
 ])
