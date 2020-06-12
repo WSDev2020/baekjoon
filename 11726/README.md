@@ -14,6 +14,7 @@
             <td colspan=4>2 * 1</td>
         </tr>
         <tr>
+            <td ></td>
             <td rowspan=2>1 * 2</td>
         </tr>
         <tr>
