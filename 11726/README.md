@@ -9,15 +9,15 @@
 <table border="1">
     <tbody>
         <tr>
-            <td rowspan=4>1</td>
-            <td rowspan=2>2</td>
-            <td rowspan=4>3</td>
+            <td rowspan=2>1 * 2</td>
+            <td colspan=2>2 * 1</td>
+            <td colspan=4>2 * 1</td>
         </tr>
         <tr>
-            <td rowspan=4>4</td>
+            <td rowspan=2>1 * 2</td>
         </tr>
         <tr>
-            <td rowspan=2>5</td>
+            <td rowspan=2>1 * 2</td>
         </tr>
     </tbody>
 </table>
