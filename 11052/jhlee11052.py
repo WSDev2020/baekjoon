@@ -50,38 +50,68 @@ util = Utils()
 
 ###########################################
 # no        title
-# 11726     2×n 타일링
+# 11052     카드 구매하기
 # 
 # basic time complexity = o(n)
 ###########################################
-class N2tiling11726:
+class BuyTheCard11052:
 
-    def __fib__(self, n):
+    dic = {}
 
-        if n == 0: return print(0) # 0일 경우
-        if n == 1: return print(1) # 1일 경우
+    def buyTheCard(self, n, m):
 
-        r = 1
-        p = 1
-        v = p
+        if n in self.dic:
+            return self.dic[n]
 
-        for i in range(n-1):
-            v = r + p
-            r = p
-            p = v
+        mx = 0
 
-        return p
+        for mo in m:
+
+            n1 = mo[0]
+            n2 = mo[2]
+
+            if n < n1: continue
+
+            v1 = int(n / n1)
+            v2 = int(n % n1)
+            v3 = int( ( v1 * n2 ) + self.buyTheCard(v2, m) if v2 > 0 else v1 * n2 )
+
+            if mx < v3:
+                mx = v3
+        
+        self.dic[n] = mx
+        
+        return mx
 
     def run(self):
 
         n = int(input())
-        
-        r = self.__fib__(n)
 
-        print(r%10007)
+        m = [int(v) for v in input().split(' ')]
 
+        m = sorted([( i, ( m[i-1] / i ) , m[i-1]) for i in range(1, len(m)+1)], key=lambda m:m[1], reverse=True)
+
+        r = self.buyTheCard(n, m)
+
+        print(r)
 
 # test asseting
-util.run([
-    N2tiling11726()
-])
+
+n = int(input())
+d = [0]*(n+1)
+p = [0]+list(map(int, input().split()))
+
+def solve():
+    d[0], d[1] = 0, p[1]
+    for i in range(2, n+1):
+        for j in range(1, i+1):
+            d[i] = max(d[i], d[i-j]+p[j])
+
+solve()
+
+print(d[n])
+
+
+print('----------------------')
+
+BuyTheCard11052().run()
