@@ -91,9 +91,6 @@ class BuyTheCard11052:
         
         m = sorted([( i, ( m[i-1] / i ) , m[i-1]) for i in range(1, len(m)+1)], key=lambda m:m[1], reverse=True)
 
-        print(m) # RXVP
-        # [(2, 2.5, 5), (3, 2.0, 6), (4, 1.75, 7), (1, 1.0, 1)]
-
         r = self.buyTheCard(n, m)
 
         print(r)
