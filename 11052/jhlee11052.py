@@ -85,33 +85,18 @@ class BuyTheCard11052:
 
     def run(self):
 
-        n = int(input())
+        n = int(input()) # 4
 
-        m = [int(v) for v in input().split(' ')]
-
+        m = [int(v) for v in input().split(' ')] # [1 5 6 7]
+        
         m = sorted([( i, ( m[i-1] / i ) , m[i-1]) for i in range(1, len(m)+1)], key=lambda m:m[1], reverse=True)
+
+        print(m) # RXVP
+        # [(2, 2.5, 5), (3, 2.0, 6), (4, 1.75, 7), (1, 1.0, 1)]
 
         r = self.buyTheCard(n, m)
 
         print(r)
 
-# test asseting
-
-n = int(input())
-d = [0]*(n+1)
-p = [0]+list(map(int, input().split()))
-
-def solve():
-    d[0], d[1] = 0, p[1]
-    for i in range(2, n+1):
-        for j in range(1, i+1):
-            d[i] = max(d[i], d[i-j]+p[j])
-
-solve()
-
-print(d[n])
-
-
-print('----------------------')
 
 BuyTheCard11052().run()
