@@ -6,8 +6,7 @@ import math as Math
 ###########################################
 # 추가 된 부분
 ###########################################
-# Make1No1463
-# N2tiling11726
+
 
 ###########################################
 # 유틸성 함수 묶음
@@ -1062,6 +1061,60 @@ class Addition123Number9095:
 
         print("\n".join(l))
 
+
+###########################################
+# no        title
+# 10844     쉬운 계단 수
+# 
+# basic time complexity = o^n
+###########################################
+class EasyStairs10844:
+
+    # 최적화를 위한 키 매핑전략
+    d = {}
+
+    def countStairs(self, s, e, n, v):
+      
+        if s > e:
+            return 1
+        else:
+
+            # 기존에 등록 된 최적값일 경우 최적값 반환
+            if n in self.d and s in self.d[n]:
+
+                return self.d[n][s]
+            else:
+                self.d[n] = {}
+
+                r = 0
+
+                if n - 1 >= 0:
+                    r = r + self.countStairs(s+1, e, n-1, v + str(n-1))
+                
+                if n + 1 < 10:
+                    r = r + self.countStairs(s+1, e, n+1, v + str(n+1))
+                
+                self.d[n][s] = r
+
+                return r
+        
+
+    def findStair(self, n):
+        o = 0
+
+        for v in range(1,10):
+            o = o + self.countStairs(1, n-1, v, str(v))
+
+        return o
+
+    def run(self):
+        n = int(input())
+        
+        r = self.findStair(n)
+
+        print(r% 1000000000)
+
+
 # test asseting
 util.run([
     # Editor1406()
@@ -1077,10 +1130,11 @@ util.run([
     # Goldbach6588()
     # Bracket9012()
     # ReverseWord9093()
-    Addition123Number9095()
+    # Addition123Number9095()
     # Starwars9653()
     # Stack10828()
     # Queue10845()
+    EasyStairs10844()
     # Deque10866()
     # Fibonacci10870()
     # Factorial10872()

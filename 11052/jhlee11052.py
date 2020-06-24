@@ -50,50 +50,57 @@ util = Utils()
 
 ###########################################
 # no        title
-# 11052     카드 구매하기
+# 10844     쉬운 계단 수
 # 
-# basic time complexity = o(n)
+# basic time complexity = o^n
 ###########################################
-class BuyTheCard11052:
+class EasyStairs10844:
 
-    dic = {}
+    # 최적화를 위한 키 매핑전략
+    d = {}
 
-    def buyTheCard(self, n, m):
+    def countStairs(self, s, e, n, v):
+      
+        if s > e:
+            return 1
+        else:
 
-        if n in self.dic:
-            return self.dic[n]
+            # 기존에 등록 된 최적값일 경우 최적값 반환
+            if n in self.d and s in self.d[n]:
 
-        mx = 0
+                return self.d[n][s]
+            else:
+                self.d[n] = {}
 
-        for mo in m:
+                r = 0
 
-            n1 = mo[0]
-            n2 = mo[2]
+                if n - 1 >= 0:
+                    r = r + self.countStairs(s+1, e, n-1, v + str(n-1))
+                
+                if n + 1 < 10:
+                    r = r + self.countStairs(s+1, e, n+1, v + str(n+1))
+                
+                self.d[n][s] = r
 
-            if n < n1: continue
-
-            v1 = int(n / n1)
-            v2 = int(n % n1)
-            v3 = int( ( v1 * n2 ) + self.buyTheCard(v2, m) if v2 > 0 else v1 * n2 )
-
-            if mx < v3:
-                mx = v3
+                return r
         
-        self.dic[n] = mx
-        
-        return mx
+
+    def findStair(self, n):
+        o = 0
+
+        for v in range(1,10):
+            o = o + self.countStairs(1, n-1, v, str(v))
+
+        return o
 
     def run(self):
-
-        n = int(input()) # 4
-
-        m = [int(v) for v in input().split(' ')] # [1 5 6 7]
+        n = int(input())
         
-        m = sorted([( i, ( m[i-1] / i ) , m[i-1]) for i in range(1, len(m)+1)], key=lambda m:m[1], reverse=True)
+        r = self.findStair(n)
 
-        r = self.buyTheCard(n, m)
+        print(r% 1000000000)
 
-        print(r)
-
-
-BuyTheCard11052().run()
+# test asseting
+util.run([
+    EasyStairs10844()
+])
