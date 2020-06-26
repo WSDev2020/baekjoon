@@ -6,8 +6,8 @@ import math as Math
 ###########################################
 # 추가 된 부분
 ###########################################
-
-
+# EasyStairs10844
+# BinaryFriend2193
 ###########################################
 # 유틸성 함수 묶음
 ###########################################
@@ -1073,7 +1073,7 @@ class EasyStairs10844:
     # 최적화를 위한 키 매핑전략
     d = {}
 
-    def countStairs(self, s, e, n, v):
+    def countStairs(self, s, e, n):
       
         if s > e:
             return 1
@@ -1089,10 +1089,10 @@ class EasyStairs10844:
                 r = 0
 
                 if n - 1 >= 0:
-                    r = r + self.countStairs(s+1, e, n-1, v + str(n-1))
+                    r = r + self.countStairs(s+1, e, n-1)
                 
                 if n + 1 < 10:
-                    r = r + self.countStairs(s+1, e, n+1, v + str(n+1))
+                    r = r + self.countStairs(s+1, e, n+1)
                 
                 self.d[n][s] = r
 
@@ -1103,17 +1103,116 @@ class EasyStairs10844:
         o = 0
 
         for v in range(1,10):
-            o = o + self.countStairs(1, n-1, v, str(v))
+            o = o + self.countStairs(1, n-1, v)
 
-        return o
+        return ( o % 1000000000 )
 
     def run(self):
         n = int(input())
         
         r = self.findStair(n)
 
-        print(r% 1000000000)
+        print(r)
 
+
+###########################################
+# no        title
+# 2193      BinaryFriend
+# 
+# basic time complexity = o^n-c
+###########################################
+class BinaryFriend2193:
+
+    # 최적화를 위한 키 매핑전략
+    d = {}
+
+    def countFriend(self, s, e, n, v):
+
+        if s > e:
+            return 1
+
+        else:
+
+            # 기존에 등록 된 최적값일 경우 최적값 반환
+            if n in self.d and s in self.d[n]:
+                return self.d[n][s]            
+
+            else:
+
+                self.d[n] = {}
+
+                r = 0
+
+                if n == 1:
+                    r = r + self.countFriend(s+1, e, 0)
+
+                else:
+                    r = r + self.countFriend(s+1, e, 0)
+                    r = r + self.countFriend(s+1, e, 1)
+
+                self.d[n][s] = r
+
+                return r
+
+    def getBinFriend(self, n):
+
+        return self.countFriend(1, n-1, 1)
+
+    def run(self):
+
+        n = int(input())
+
+        m = self.getBinFriend(n)
+
+        print(m)
+
+"""
+6
+10 20 10 30 20 50
+
+8
+10 20 12 15 21 24 20 30
+"""
+class LongNumbers11053:
+
+    m = 0
+
+    def getLongCount(self, s, e, r, v1, c):
+        
+        if s == e:
+            print('-------------------------------')
+            print(c)
+            print('-------------------------------')
+            if self.m < c:
+                self.m = c
+
+        else:
+            v2 = r[s]
+            print('v1 >>>>>',s,v1, v2)
+            if v1 >= v2:
+                self.getLongCount(s+1, e, r, v1, c)
+
+            else:
+                c = c + 1
+                
+                for i in range(s+1, e+1):
+                    self.getLongCount(i, e, r, v2, c)
+
+
+    def getNumberCount(self, s, e, r):
+
+        self.getLongCount(s+1, e, r, r[s], 1)
+
+    def run(self):
+
+        #n = int(input())
+        n = 8
+        r = [int(v) for v in '10 20 12 15 21 24 20 30'.split(' ')]
+        #r = [int(v) for v in input().split(' ')]
+
+        self.getNumberCount(0, n, r)
+
+        print(self.m)
 
 # test asseting
 util.run([
@@ -1124,6 +1223,7 @@ util.run([
     # StackNumber1874()
     # GetDecimal1929()
     # FindDecimal1978()
+    # BinaryFriend2193()
     # HelloWorld2557()
     # GCDAndLCM2609()
     # BlackJeck2798()
@@ -1134,9 +1234,10 @@ util.run([
     # Starwars9653()
     # Stack10828()
     # Queue10845()
-    EasyStairs10844()
+    # EasyStairs10844()
     # Deque10866()
     # Fibonacci10870()
     # Factorial10872()
+    LongNumbers11053()
     # N2tiling11726()
 ])
